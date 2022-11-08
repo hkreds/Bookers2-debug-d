@@ -18,7 +18,7 @@
         <td><%= link_to book.title,book %></td>
         <td><%= book.body %></td>
         <td>
-          <%= link_to search_path do %>
+          <%= link_to search_path(:search => "tag_name",:range => "Book",:word => book.tag) do %>
             <%= book.tag %>
           <% end %>
         </td>
