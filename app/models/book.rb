@@ -6,10 +6,10 @@ class Book < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true, length: { maximum: 200 }
-  
+
   scope :latest, -> {order(created_at: :desc)}
   scope :star_count, -> {order(star: :desc)}
-  
+
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
@@ -23,8 +23,8 @@ class Book < ApplicationRecord
       @book = Book.where("title LIKE?", "%#{word}")
     elsif search == "partial_match"
       @book = Book.where("title LIKE?", "%#{word}%")
-    else
-      @book = Book.all
+    elsif search == "tag_name"
+      @book = Book.where("tag LIKE?", "%#{word}%")
     end
   end
 end
